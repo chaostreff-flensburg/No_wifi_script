@@ -1,2 +1,2 @@
-packetLoss=($(ping 8.8.8.8 -c 5 |grep -oP "(\d+(\.\d+)?(?=%))"))
+packetLoss=($(batctl p 52:54:00:f2:27:8a -c 500 |grep -o [0-9]*%))
 if [ 70 -lt $packetLoss ]; then uci set wireless.@wifi-device[0].disabled=1; uci commit wireless; wifi; else uci set wireless.@wifi-device[0].disabled=0; uci commit wireless; wifi; fi
